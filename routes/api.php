@@ -53,4 +53,5 @@ Route::get('departments/requests/output/{id}',[\App\Http\Controllers\DepartmentC
 Route::get('departments/requests/input/{id}',[\App\Http\Controllers\DepartmentController::class, 'showInputRequests'])->name('DepartmentInputRequests');
 Route::apiResource('types','App\Http\Controllers\TypeController');
 Route::get('types/requests/{id}',[\App\Http\Controllers\TypeController::class, 'showRequests'])->name('TypeRequests');
+Route::apiResource('invitations','App\Http\Controllers\InvitationController');
 
