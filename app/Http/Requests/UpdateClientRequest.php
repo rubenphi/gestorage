@@ -13,7 +13,7 @@ class UpdateClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class UpdateClientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'active' => 'required|min:1|max:1',
+            'first_name' => 'required|min:2|max:100',
+            'last_name' => 'required|min:2|max:100',
+            'country' => 'required|min:2|max:100',
+            'region' => 'required|min:2|max:100',
+            'city' => 'required|min:2|max:100',
+            'document' => 'required|min:2|max:100|unique:clients,document,' . $this->route('client')->id,
         ];
     }
 }

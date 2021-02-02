@@ -30,9 +30,9 @@ class Company extends Model
         return $this->hasMany(Status::class);
     }
     public function clients(){
-        return $this->belongsToMany(Client::class,'client_company')->withPivot('address','email');
+        return $this->belongsToMany(Client::class,'client_company')->withPivot('address','email','active');
     }
     public function users(){
-        return $this->belongsToMany(User::class,'company_user')->withPivot('rol');
+        return $this->belongsToMany(User::class,'company_user')->withPivot('rol','active');
     }
 }

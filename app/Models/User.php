@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,15 +45,15 @@ class User extends Authenticatable
     ];
 
     public function companies(){
-        return $this->belongsToMany(Company::class,'company_user')->withPivot('rol');
+        return $this->belongsToMany(Company::class,'company_user')->withPivot('rol','active');
     }
     public function requests(){
         return $this->hasMany(Request::class);
     }
     public function areas(){
-        return $this->belongsToMany(Area::class)->withPivot('rol');
+        return $this->belongsToMany(Area::class)->withPivot('rol','active');
     }
     public function departments(){
-        return $this->belongsToMany(Department::class)->withPivot('rol');
+        return $this->belongsToMany(Department::class)->withPivot('rol','active');
     }
 }

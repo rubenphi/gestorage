@@ -22,7 +22,7 @@ class CreateClientsTable extends Migration {
             $table->string('country', 100)->nullable();
             $table->string('region', 100)->nullable();
             $table->string('city', 100)->nullable();
-            $table->string('document', 100)->nullable();
+            $table->string('document', 100)->unique()->nullable();
             $table->timestamps();
         });
     }

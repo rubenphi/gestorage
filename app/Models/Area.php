@@ -36,7 +36,7 @@ class Area extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('rol');
+        return $this->belongsToMany(User::class)->withPivot(['rol','active']);
     }
 }
 

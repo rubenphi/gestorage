@@ -54,4 +54,8 @@ Route::get('departments/requests/input/{id}',[\App\Http\Controllers\DepartmentCo
 Route::apiResource('types','App\Http\Controllers\TypeController');
 Route::get('types/requests/{id}',[\App\Http\Controllers\TypeController::class, 'showRequests'])->name('TypeRequests');
 Route::apiResource('invitations','App\Http\Controllers\InvitationController');
-
+Route::apiResource('clients','App\Http\Controllers\ClientController');
+Route::get('clients/companies/{id}',[\App\Http\Controllers\ClientController::class, 'showCompanies'])->name('ClientCompanies');
+Route::post('clients/companies/add',[\App\Http\Controllers\ClientController::class, 'addCompanies'])->name('ClientAddCompanies');
+Route::delete('clients/companies/delete',[\App\Http\Controllers\ClientController::class, 'deleteCompanies'])->name('ClientDeleteCompanies');
+Route::put('clients/companies/update',[\App\Http\Controllers\ClientController::class, 'updateCompanies'])->name('ClientUpdateCompanies');
