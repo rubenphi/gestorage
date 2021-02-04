@@ -54,6 +54,7 @@ Route::get('departments/requests/input/{id}',[\App\Http\Controllers\DepartmentCo
 Route::apiResource('types','App\Http\Controllers\TypeController');
 Route::get('types/requests/{id}',[\App\Http\Controllers\TypeController::class, 'showRequests'])->name('TypeRequests');
 Route::apiResource('invitations','App\Http\Controllers\InvitationController');
+Route::apiResource('statuses','App\Http\Controllers\StatusController');
 Route::apiResource('clients','App\Http\Controllers\ClientController');
 Route::get('clients/companies/{id}',[\App\Http\Controllers\ClientController::class, 'showCompanies'])->name('ClientCompanies');
 Route::post('clients/companies/add',[\App\Http\Controllers\ClientController::class, 'addCompanies'])->name('ClientAddCompanies');

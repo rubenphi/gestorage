@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Client extends Model
 {
     protected $table = 'clients';
@@ -19,7 +20,6 @@ class Client extends Model
     ];
 
     public function companies(){
-        return $this->belongsToMany(Client::class,'client_company') ->withPivot('address','email');
-
+        return $this->belongsToMany(Company::class,'client_company')->withPivot('email','address','active');
     }
 }

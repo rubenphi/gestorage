@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ef67cdd-7ccc-457e-9bce-c0f6b5069c9b" name="Default Changelist" comment="client controller">
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CreateClientCompanyRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/DeleteClientCompanyRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateClientCompanyRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CreateStatusRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateStatusRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateClientRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateClientRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateClientRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateClientRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Area.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Area.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135204_create_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135204_create_clients_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +189,8 @@
       <workItem from="1611845330320" duration="10670000" />
       <workItem from="1611927297381" duration="21038000" />
       <workItem from="1612128126415" duration="5570000" />
-      <workItem from="1612212647285" duration="10524000" />
+      <workItem from="1612212647285" duration="10582000" />
+      <workItem from="1612453887100" duration="1758000" />
     </task>
     <task id="LOCAL-00001" summary="invitation controller">
       <created>1612216531564</created>
@@ -205,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612216531564</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="client controller">
+      <created>1612224219719</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612224219719</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
