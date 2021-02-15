@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\CreateAreaUserRequest;
 use App\Http\Requests\CreateCompanyUserRequest;
 use App\Http\Requests\CreateDepartmentUserRequest;
@@ -9,11 +10,14 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\DeleteAreaUserRequest;
 use App\Http\Requests\DeleteCompanyUserRequest;
 use App\Http\Requests\DeleteDepartmentUserRequest;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UpdateAreaUserRequest;
 use App\Http\Requests\UpdateCompanyUserRequest;
 use App\Http\Requests\UpdateDepartmentUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -41,12 +45,56 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
+        $input['password'] = Hash::make($request->password);
         User::create($input);
         return response()->json([
             'res' => true,
             'message' => 'success operation'
         ],200);
+    }
+
+    public function login(LoginRequest $request){
+        $user = User::whereEmail($request->email)->first();
+        if(!is_null($user) && Hash::check($request ->password, $user->password)){
+            $token = $user->createToken('contactos')->accessToken;
+            $user->save();
+            return response()->json([
+                'res' => true,
+                'token' => $token,
+                'message' => "success login"
+            ],200);
+        }
+        else {
+            return response()->json([
+                'res' => false,
+                'message' => "login fail"
+            ],200);
+        }
+    }
+
+    public function logout(\Illuminate\Http\Request $request)
+    {
+        $user = auth()->user();
+        $user->token()->revoke();
+        return response()->json([
+            'res' => true,
+            'message' => 'Logout exitoso'
+        ], 200);
+    }
+
+    public function logoutAll()
+    {
+
+        $user = auth()->user();
+        $user->tokens->each(function ($token, $key){
+            $token->revoke();
+        });
+        $user->save();
+
+        return response()->json([
+            'res' => true,
+            'message' => 'Logout exitoso de todos los servicios'
+        ], 200);
     }
 
     /**
@@ -70,6 +118,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $input = $request->all();
+        $input['password'] = Hash::make($request->password);
         $user->update($input);
         return response()->json([
             'res' => true,
@@ -245,5 +294,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return $user->requests;
     }
+
+
 
 }
