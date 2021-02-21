@@ -18,6 +18,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Traits\LogedTrait;
 
 class UserController extends Controller
 {
@@ -33,6 +34,13 @@ class UserController extends Controller
                 $users = User::all();
 
     return $users;
+
+
+
+    }
+
+    public function logeduser(\Illuminate\Http\Request $request){
+      return LogedTrait::loged();
 
     }
 
@@ -117,6 +125,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
         $user->update($input);

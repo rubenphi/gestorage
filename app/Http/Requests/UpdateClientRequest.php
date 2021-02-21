@@ -30,7 +30,12 @@ class UpdateClientRequest extends FormRequest
             'country' => 'required|min:2|max:100',
             'region' => 'required|min:2|max:100',
             'city' => 'required|min:2|max:100',
-            'document' => 'required|min:2|max:100|unique:clients,document,' . $this->route('client')->id,
+            'document' => 'required|min:2|max:100',
+            'email' => 'required',
+            'address' => 'required',
+            'company_id' => 'required'
+
+
         ];
     }
 }

@@ -7,7 +7,9 @@ use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\DeleteClientCompanyRequest;
 use App\Http\Requests\UpdateClientCompanyRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Http\Traits\LogedTrait;
 use App\Models\Client;
+use Illuminate\Support\Arr;
 
 class ClientController extends Controller
 {
@@ -18,59 +20,74 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::with('company')->get();
         return $clients;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateClientRequest $request)
     {
+        Arr::add($request, 'documentInCompany', ($request['company_id'].'-'.$request['document']));
+        $request->validate([
+            'documentInCompany' => ['unique:clients,companyDocument']
+        ]);
         $input = $request->all();
 
-        Client::create($input);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ],200);
+        if (LogedTrait::loged()) {
+            Client::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'success operation'
+            ], 200);
+        } else {
+            return response()->json([
+                'res' => true,
+                'message' => 'access denied'
+            ], 200);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Client $client)
     {
-        return $client;
+        return $client::with('company')->find($client['id']);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        $input = $request->all();
-        $client->update($input);
+        Arr::add($request, 'documentInCompany', ($request['company_id'].'-'.$request['document']));
+       $request->validate([
+           'documentInCompany' => ['unique:clients,companyDocument,' . $client->id ]
+       ]);
+       $input = $request->all();
+       $client->update($input);
         return response()->json([
             'res' => true,
-            'message' => 'success operation'
-        ],200);
+            'message' => 'success operation',
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -79,56 +96,9 @@ class ClientController extends Controller
         return response()->json([
             'res' => true,
             'message' => 'success operation'
-        ],200);
+        ], 200);
     }
 
-    public function showCompanies(int $id)
-    {
-        $client = Client::findOrFail($id);
-        return $client->companies;
-    }
 
-    public function addCompanies(CreateClientCompanyRequest $request)
-    {
 
-        $client = Client::findOrFail($request->client_id);
-        $client->companies()->syncWithoutDetaching ([$request->company_id => ['email' => $request->email,'address' => $request->address, 'active' => $request->active, 'created_at' => date('Y-m-d H:i:s')]]);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ],200);
-    }
-
-    public function deleteCompanies(DeleteClientCompanyRequest $request)
-    {
-
-        $client = Client::findOrFail($request->client_id);
-
-        $client->companies()->detach($request->company_id);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ],200);
-
-    }
-
-    public function updateCompanies(UpdateClientCompanyRequest $request)
-    {
-        $client = Client::findOrFail($request->client_id);
-        $exist = $client->companies()->where('company_id', $request->company_id)->exists();
-        if ($exist == true) {
-            $client->companies()->updateExistingPivot($request->company_id,['email' => $request->email,'address' => $request->address, 'active' => $request->active, 'created_at' => date('Y-m-d H:i:s')]);
-            return response()->json([
-                'res' => true,
-                'message' => 'success operation'
-            ],200);
-        }
-        else{
-            return response()->json([
-                'res' => false,
-                'message' => "does not exist relation"
-            ],200);
-        }
-
-    }
 }

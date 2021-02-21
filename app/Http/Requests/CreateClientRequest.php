@@ -23,6 +23,7 @@ class CreateClientRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'active' => 'required|min:1|max:1',
             'first_name' => 'required|min:2|max:100',
@@ -30,7 +31,10 @@ class CreateClientRequest extends FormRequest
             'country' => 'required|min:2|max:100',
             'region' => 'required|min:2|max:100',
             'city' => 'required|min:2|max:100',
-            'document' => 'required|unique:clients,document|min:2|max:100',
+            'document' => 'required|min:2|max:100',
+            'email' => 'required',
+            'address' => 'required',
+            'company_id' => 'required'
         ];
     }
 }

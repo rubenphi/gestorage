@@ -22,14 +22,10 @@ class ClientSeeder extends Seeder
             'region' => 'Pampeana',
             'city' => 'Buenos Aires',
             'document' => 'A3218947',
-
-
-        ]]);
-        DB::table('client_company')->insert([[
             'company_id' => 2,
-            'client_id' => 1,
             'address' => 'calle falsa 123',
-            'email' => 'felipe@gmail.com'
+            'email' => 'felipe@gmail.com',
+            'companyDocument' => '2|A3218947'
         ]]);
     }
 }

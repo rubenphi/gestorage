@@ -21,8 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('users/add',[\App\Http\Controllers\UserController::class, 'store'])->name('UserAdd');
 Route::post('users/login',[\App\Http\Controllers\UserController::class, 'login'])->name('UserLogin');
+Route::get('users/loged',[\App\Http\Controllers\UserController::class, 'logeduser'])->name('UserLoged');
 
 Route::group(['middleware'=>'auth:api'], function(){
+    Route::get('users/loged',[\App\Http\Controllers\UserController::class, 'logeduser'])->name('UserLoged');
     Route::apiResource('users','App\Http\Controllers\UserController');
     Route::get('users/companies/{id}',[\App\Http\Controllers\UserController::class, 'showCompanies'])->name('UserCompanies');
     Route::post('users/companies/add',[\App\Http\Controllers\UserController::class, 'addCompanies'])->name('UserAddCompanies');
@@ -60,10 +62,6 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::apiResource('invitations','App\Http\Controllers\InvitationController');
     Route::apiResource('statuses','App\Http\Controllers\StatusController');
     Route::apiResource('clients','App\Http\Controllers\ClientController');
-    Route::get('clients/companies/{id}',[\App\Http\Controllers\ClientController::class, 'showCompanies'])->name('ClientCompanies');
-    Route::post('clients/companies/add',[\App\Http\Controllers\ClientController::class, 'addCompanies'])->name('ClientAddCompanies');
-    Route::delete('clients/companies/delete',[\App\Http\Controllers\ClientController::class, 'deleteCompanies'])->name('ClientDeleteCompanies');
-    Route::put('clients/companies/update',[\App\Http\Controllers\ClientController::class, 'updateCompanies'])->name('ClientUpdateCompanies');
     Route::apiResource('requests','App\Http\Controllers\RequestController');
     Route::post('users/logout', [\App\Http\Controllers\UserController::class, 'logout'])->name('UsersLogout');
     Route::post('users/alogout', [\App\Http\Controllers\UserController::class, 'logoutAll'])->name('UsersAllLogout');

@@ -15,11 +15,15 @@ class Client extends Model
         'country',
         'region',
         'city',
-        'document'
+        'document',
+        'email',
+        'address',
+        'company_id',
+        'companyDocument'
 
     ];
 
-    public function companies(){
-        return $this->belongsToMany(Company::class,'client_company')->withPivot('email','address','active');
+    public function company(){
+        return $this->belongsTo(Company::class,'company_id');
     }
 }

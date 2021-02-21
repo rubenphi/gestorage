@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAreaRequest;
 use App\Http\Requests\UpdateAreaRequest;
 use App\Models\Area;
+use \App\Http\Traits\LogedTrait;
 
 class AreaController extends Controller
 {
@@ -16,83 +17,144 @@ class AreaController extends Controller
     public function index()
     {
         $areas = Area::with('company')->with('department')->get();
+
         return $areas;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateAreaRequest $request)
     {
-        $input = $request->all();
 
-        Area::create($input);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ],200);
+        if (LogedTrait::admin($request['company_id']) ==  true) {
+            $input = $request->all();
+            Area::create($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'success operation'
+            ], 200);
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'You are not admin'
+            ], 200);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Area $area)
     {
-        return $area::with('company')->with('department')->find($area['id']);
+
+        if (LogedTrait::empresa($area['company_id'])){
+            return $area::with('company')->with('department')->find($area['id']);
+        }
+        else{
+            return response()->json([
+                'res' => false,
+                'message' => 'You do not have access to the data of that company'
+            ], 200);
+        }
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        $input = $request->all();
-        $area->update($input);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ],200);
+        if (LogedTrait::admin($request['company_id']) ==  true) {
+            $input = $request->all();
+            $area->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'success operation'
+            ], 200);
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'You are not admin'
+            ], 200);
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Area::destroy($id);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ],200);
+        if (LogedTrait::admin($id) ==  true) {
+            Area::destroy($id);
+            return response()->json([
+                'res' => true,
+                'message' => 'success operation'
+            ], 200);
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'You are not admin'
+            ], 200);
+        }
     }
 
-    public function  showUsers(int $id){
-        $areas = Area::findOrFail($id);
-        return $areas->users;
+    public function showUsers(int $id)
+    {
+        $area = Area::findOrFail($id);
+
+        if (LogedTrait::empresa($area['company_id'])){
+            return $area->users;
+        }
+        else{
+            return response()->json([
+                'res' => false,
+                'message' => 'You do not have access to the data of that company'
+            ], 200);
+        }
+
     }
 
     public function showOutputRequests(int $id)
     {
         $area = Area::findOrFail($id);
-        return $area->fromArea;
+        if (LogedTrait::empresa($area['company_id'])){
+            return $area->fromArea;
+        }
+        else{
+            return response()->json([
+                'res' => false,
+                'message' => 'You do not have access to the data of that company'
+            ], 200);
+        }
+
     }
 
     public function showInputRequests(int $id)
     {
         $area = Area::findOrFail($id);
-        return $area->toArea;
+        if (LogedTrait::empresa($area['company_id'])){
+            return $area->toArea;
+        }
+        else{
+            return response()->json([
+                'res' => false,
+                'message' => 'You do not have access to the data of that company'
+            ], 200);
+        }
     }
 }
