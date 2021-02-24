@@ -16,9 +16,16 @@ class AreaController extends Controller
      */
     public function index()
     {
+        if (LogedTrait::superadmin()){
         $areas = Area::with('company')->with('department')->get();
 
         return $areas;
+        }else {
+            return response()->json([
+                'res' => true,
+                'message' => 'access denied'
+            ], 200);
+        }
     }
 
     /**
@@ -30,7 +37,7 @@ class AreaController extends Controller
     public function store(CreateAreaRequest $request)
     {
 
-        if (LogedTrait::admin($request['company_id']) ==  true) {
+        if (LogedTrait::admin($request['company_id']) || LogedTrait::superadmin()) {
             $input = $request->all();
             Area::create($input);
             return response()->json([
@@ -54,7 +61,7 @@ class AreaController extends Controller
     public function show(Area $area)
     {
 
-        if (LogedTrait::empresa($area['company_id'])){
+        if (LogedTrait::empresa($area['company_id']) || LogedTrait::superadmin()){
             return $area::with('company')->with('department')->find($area['id']);
         }
         else{
@@ -75,7 +82,7 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        if (LogedTrait::admin($request['company_id']) ==  true) {
+        if (LogedTrait::admin($request['company_id']) || LogedTrait::superadmin()) {
             $input = $request->all();
             $area->update($input);
             return response()->json([
@@ -99,7 +106,8 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        if (LogedTrait::admin($id) ==  true) {
+
+        if (LogedTrait::admin(Area::find($id)->company_id) || LogedTrait::superadmin()) {
             Area::destroy($id);
             return response()->json([
                 'res' => true,
@@ -117,7 +125,7 @@ class AreaController extends Controller
     {
         $area = Area::findOrFail($id);
 
-        if (LogedTrait::empresa($area['company_id'])){
+        if (LogedTrait::empresa($area['company_id']) || LogedTrait::superadmin()){
             return $area->users;
         }
         else{
@@ -132,7 +140,7 @@ class AreaController extends Controller
     public function showOutputRequests(int $id)
     {
         $area = Area::findOrFail($id);
-        if (LogedTrait::empresa($area['company_id'])){
+        if (LogedTrait::empresa($area['company_id']) || LogedTrait::superadmin()){
             return $area->fromArea;
         }
         else{
@@ -147,7 +155,7 @@ class AreaController extends Controller
     public function showInputRequests(int $id)
     {
         $area = Area::findOrFail($id);
-        if (LogedTrait::empresa($area['company_id'])){
+        if (LogedTrait::empresa($area['company_id']) || LogedTrait::superadmin()){
             return $area->toArea;
         }
         else{

@@ -17,6 +17,7 @@ use App\Http\Requests\UpdateDepartmentUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Request;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Traits\LogedTrait;
 
@@ -52,8 +53,10 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        Arr::add($request, 'superadmin', false);
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
+
         User::create($input);
         return response()->json([
             'res' => true,
@@ -158,9 +161,12 @@ class UserController extends Controller
 
     public function addCompanies(CreateCompanyUserRequest $request)
     {
-
+        Arr::add($request, 'companyUser', ($request->company_id.'-'.$request->user_id));
+        $request->validate([
+            'companyUser' => ['unique:company_user,companyUser']
+        ]);
         $user = User::findOrFail($request->user_id);
-        $user->companies()->syncWithoutDetaching ([$request->company_id => ['rol' => $request->rol, 'active' => $request->active, 'created_at' => date('Y-m-d H:i:s')]]);
+        $user->companies()->syncWithoutDetaching ([$request->company_id => ['rol' => $request->rol, 'active' => $request->active, 'companyUser' => $request->companyUser, 'created_at' => date('Y-m-d H:i:s')]]);
         return response()->json([
             'res' => true,
             'message' => 'success operation'
@@ -184,11 +190,16 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $exist = $user->companies()->where('company_id', $request->company_id)->exists();
+        Arr::add($request, 'companyUser', ($request->company_id.'-'.$request->user_id));
+       $request->validate([
+            'companyUser' => ['unique:company_user,companyUser,' . $user->companies()->where('company_id', $request->company_id)->first()->pivot->id]
+        ]);
+
         if ($exist == true) {
-            $user->companies()->updateExistingPivot($request->company_id,['rol' => $request->rol, 'active' => $request->active, 'updated_at' => date('Y-m-d H:i:s')]);
+          $user->companies()->updateExistingPivot($request->company_id,['rol' => $request->rol, 'active' => $request->active, 'companyUser' => $request->companyUser, 'updated_at' => date('Y-m-d H:i:s')]);
             return response()->json([
                 'res' => true,
-                'message' => 'success operation'
+                'message' => 'success operation',
             ],200);
         }
         else{
@@ -208,8 +219,12 @@ class UserController extends Controller
 
     public function addAreas(CreateAreaUserRequest $request)
     {
+        Arr::add($request, 'areaUser', ($request->area_id.'-'.$request->user_id));
+        $request->validate([
+            'areaUser' => ['unique:area_user,areaUser']
+        ]);
         $user = User::findOrFail($request->user_id);
-        $user->areas()->syncWithoutDetaching([$request->area_id => ['rol' => $request->rol, 'active' => $request->active, 'created_at' => date('Y-m-d H:i:s')]]);
+        $user->areas()->syncWithoutDetaching([$request->area_id => ['rol' => $request->rol, 'active' => $request->active,  'areaUser' => $request->areaUser , 'created_at' => date('Y-m-d H:i:s')]]);
         return response()->json([
             'res' => true,
             'message' => 'success operation'
@@ -234,8 +249,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $exist = $user->areas()->where('area_id', $request->area_id)->exists();
+
+        Arr::add($request, 'areaUser', ($request->area_id.'-'.$request->user_id));
+       $request->validate([
+            'areaUser' => ['unique:area_user,areaUser,' . $user->areas()->where('area_id', $request->area_id)->first()->pivot->id]
+        ]);
+
         if ($exist == true) {
-            $user->areas()->updateExistingPivot($request->area_id,['rol' => $request->rol, 'active' => $request->active, 'updated_at' => date('Y-m-d H:i:s')]);
+           $user->areas()->updateExistingPivot($request->area_id,['rol' => $request->rol, 'active' => $request->active, 'areaUser' => $request->areaUser , 'updated_at' => date('Y-m-d H:i:s')]);
             return response()->json([
                 'res' => true,
                 'message' => 'success operation'
@@ -257,9 +278,12 @@ class UserController extends Controller
 
     public function addDepartments(CreateDepartmentUserRequest $request)
     {
-
+        Arr::add($request, 'departmentUser', ($request->department_id.'-'.$request->user_id));
+        $request->validate([
+            'departmentUser' => ['unique:department_user,departmentUser']
+        ]);
         $user = User::findOrFail($request->user_id);
-        $user->departments()->syncWithoutDetaching ([$request->department_id => ['rol' => $request->rol, 'active' => $request->active], 'created_at' => date('Y-m-d H:i:s')]);
+        $user->departments()->syncWithoutDetaching ([$request->department_id => ['rol' => $request->rol, 'active' => $request->active, 'departmentUser' => $request->departmentUser , 'created_at' => date('Y-m-d H:i:s')]]);
         return response()->json([
             'res' => true,
             'message' => 'success operation'
@@ -283,8 +307,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $exist = $user->departments()->where('department_id', $request->department_id)->exists();
+
+        Arr::add($request, 'departmentUser', ($request->area_id.'-'.$request->user_id));
+        $request->validate([
+            'departmentUser' => ['unique:department_user,departmentUser,' . $user->departments()->where('department_id', $request->department_id)->first()->pivot->id]
+        ]);
+
         if ($exist == true) {
-            $user->departments()->updateExistingPivot($request->department_id,['rol' => $request->rol, 'active' => $request->active, 'updated_at' => date('Y-m-d H:i:s')]);
+            $user->departments()->updateExistingPivot($request->department_id,['rol' => $request->rol, 'active' => $request->active, 'departmentUser' => $request->departmentUser , 'updated_at' => date('Y-m-d H:i:s')]);
             return response()->json([
                 'res' => true,
                 'message' => 'success operation'

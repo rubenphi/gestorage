@@ -20,6 +20,7 @@ class CreateDepartmentUserTable extends Migration {
             $table->string('rol', 100)->nullable();
             $table->foreignId('department_id')->nullable()->references('id')->on('departments')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('departmentUser')->unique();
             $table->timestamps();
         });
     }

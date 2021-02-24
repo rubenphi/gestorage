@@ -52,4 +52,8 @@ trait LogedTrait
             return false;
         }
     }
+
+    public static function superadmin(){
+       return auth()->user()->superadmin;
+    }
 }

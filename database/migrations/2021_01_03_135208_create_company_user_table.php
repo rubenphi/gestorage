@@ -20,6 +20,7 @@ class CreateCompanyUserTable extends Migration {
             $table->string('rol', 100)->nullable();
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('companyUser')->unique();
             $table->timestamps();
         });
     }

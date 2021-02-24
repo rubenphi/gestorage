@@ -20,8 +20,15 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with('company')->get();
-        return $clients;
+        if (LogedTrait::superadmin() == true) {
+            $clients = Client::with('company')->get();
+            return $clients;
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'access denied'
+            ], 200);
+        }
     }
 
     /**
@@ -32,13 +39,13 @@ class ClientController extends Controller
      */
     public function store(CreateClientRequest $request)
     {
-        Arr::add($request, 'documentInCompany', ($request['company_id'].'-'.$request['document']));
+        Arr::add($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
         $request->validate([
-            'documentInCompany' => ['unique:clients,companyDocument']
+            'companyDocument' => ['unique:clients,companyDocument']
         ]);
         $input = $request->all();
 
-        if (LogedTrait::loged()) {
+        if (LogedTrait::empresa($request->company_id) || LogedTrait::superadmin()) {
             Client::create($input);
             return response()->json([
                 'res' => true,
@@ -46,8 +53,8 @@ class ClientController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'res' => true,
-                'message' => 'access denied'
+                'res' => false,
+                'message' => 'You do not have access to the data of that company'
             ], 200);
         }
     }
@@ -60,7 +67,14 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return $client::with('company')->find($client['id']);
+        if (LogedTrait::empresa($client['company_id']) || LogedTrait::superadmin()) {
+            return $client::with('company')->find($client['id']);
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'You do not have access to the data of that company'
+            ], 200);
+        }
     }
 
     /**
@@ -72,16 +86,23 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        Arr::add($request, 'documentInCompany', ($request['company_id'].'-'.$request['document']));
-       $request->validate([
-           'documentInCompany' => ['unique:clients,companyDocument,' . $client->id ]
-       ]);
-       $input = $request->all();
-       $client->update($input);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation',
-        ], 200);
+        if (LogedTrait::empresa($request->company_id) || LogedTrait::admin()) {
+            Arr::add($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
+            $request->validate([
+                'companyDocument' => ['unique:clients,companyDocument,' . $client->id]
+            ]);
+            $input = $request->all();
+            $client->update($input);
+            return response()->json([
+                'res' => true,
+                'message' => 'success operation',
+            ], 200);
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'You are not admin'
+            ], 200);
+        }
     }
 
     /**
@@ -92,13 +113,19 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::destroy($id);
-        return response()->json([
-            'res' => true,
-            'message' => 'success operation'
-        ], 200);
+        if (LogedTrait::admin(Client::find($id)->company_id) || LogedTrait::superadmin()) {
+            Client::destroy($id);
+            return response()->json([
+                'res' => true,
+                'message' => 'success operation'
+            ], 200);
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'You are not admin'
+            ], 200);
+        }
     }
-
 
 
 }

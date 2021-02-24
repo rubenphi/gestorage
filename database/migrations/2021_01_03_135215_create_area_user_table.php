@@ -20,6 +20,7 @@ class CreateAreaUserTable extends Migration {
             $table->string('rol', 100)->nullable();
             $table->foreignId('area_id')->nullable()->references('id')->on('areas')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('areaUser')->unique();
             $table->timestamps();
         });
     }

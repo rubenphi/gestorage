@@ -15,17 +15,29 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([[
-            'name' => 'Manuel Goreiro',
+        DB::table('users')->insert([
+            [
+
+                'first_name' => 'Rubén Darío',
+                'last_name' => 'Villamil Zamora',
+                'active' => true,
+                'email' => 'rubenphii@gmail.com',
+                'password' => Hash::make('1110535460'),
+
+
+            ],
+            [
+
             'first_name' => 'Manuel',
             'last_name' => 'Goreiro',
             'active' => true,
             'email' => 'manolito@manolos.com',
-            'password' => Hash::make('rockefellerpapafrita')
+            'password' => Hash::make('rockefellerpapafrita'),
+
 
         ],
             [
-                'name' => 'Felipe Perez',
+
                 'first_name' => 'Felipe',
                 'last_name' => 'Perez',
                 'active' => true,
@@ -35,16 +47,18 @@ class UserSeeder extends Seeder
             ]
         ]);
         DB::table('company_user')->insert([[
-            'company_id' => 2,
-            'user_id' => 1,
+            'company_id' => 1,
+            'user_id' => 2,
             'active' => true,
-            'rol' => 'admin'
+            'rol' => 'admin',
+            'companyUser' => '1-2'
         ],
             [
                 'company_id' => 2,
                 'user_id' => 2,
                 'active' => true,
-                'rol' => 'admin'
+                'rol' => 'admin',
+                'companyUser' => '2-2'
             ]
             ]);
 
@@ -52,26 +66,30 @@ class UserSeeder extends Seeder
             'area_id' => 1,
             'active' => true,
             'user_id' => 1,
-            'rol' => 'admin'
+            'rol' => 'admin',
+            'areaUser' => '1-1'
         ],
             [
                 'area_id' => 1,
                 'active' => true,
                 'user_id' => 2,
-                'rol' => 'admin'
+                'rol' => 'admin',
+                'areaUser' => '1-2'
             ]]);
 
         DB::table('department_user')->insert([[
             'department_id' => 1,
             'user_id' => 1,
             'active' => true,
-            'rol' => 'admin'
+            'rol' => 'admin',
+            'departmentUser' => '1-1'
         ],
             [
                 'department_id' => 1,
-                'user_id' => 1,
+                'user_id' => 2,
                 'active' => true,
-                'rol' => 'admin'
+                'rol' => 'admin',
+                'departmentUser' => '1-2'
             ]]);
     }
 }
