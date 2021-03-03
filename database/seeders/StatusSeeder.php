@@ -17,15 +17,19 @@ class StatusSeeder extends Seeder
         DB::table('statuses')->insert([
             [
                 'name' => 'pendiente',
-                'company_id' => 2
+                'company_id' => 2,
+                'companyStatus' => '2-pendiente'
             ],
             [
                 'name' => 'en proceso',
-                'company_id' => 2
+                'company_id' => 2,
+                'companyStatus' => '2-en proceso'
             ],
             [
                 'name' => 'concluido',
-                'company_id' => 2
+                'company_id' => 2,
+                'companyStatus' => '2-concluido'
+
             ]
         ]);
     }

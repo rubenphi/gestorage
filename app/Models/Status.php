@@ -11,6 +11,9 @@ class Status extends Model
         'name',
         'company_id'
     ];
+    protected $hidden = [
+        'companyStatus'
+    ];
     public function company(){
         return $this->belongsTo(Company::class);
     }

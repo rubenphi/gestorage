@@ -19,6 +19,7 @@ class CreateInvitationsTable extends Migration {
             $table->boolean('active')->default(true);
             $table->string('code', 100)->nullable();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('companyInvitation')->unique();
             $table->timestamps();
         });
     }

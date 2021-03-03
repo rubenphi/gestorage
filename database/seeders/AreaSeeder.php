@@ -18,7 +18,8 @@ class AreaSeeder extends Seeder
             'active'=>true,
             'name' => 'pasivos',
             'company_id' => 2,
-            'department_id' => 1
+            'department_id' => 1,
+            'companyArea' => '2-pasivos'
         ]]);
     }
 }

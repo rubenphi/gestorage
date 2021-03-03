@@ -13,6 +13,10 @@ class Department extends Model
         'company_id'
     ];
 
+    protected $hidden = [
+        'companyDepartment'
+    ];
+
     public function areas()
     {
         return $this->hasMany(Area::class);

@@ -23,6 +23,10 @@ class Client extends Model
 
     ];
 
+    protected $hidden = [
+        'companyDocument'
+    ];
+
     public function company(){
         return $this->belongsTo(Company::class,'company_id');
     }

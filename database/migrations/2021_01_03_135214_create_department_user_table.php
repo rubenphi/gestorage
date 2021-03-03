@@ -21,6 +21,7 @@ class CreateDepartmentUserTable extends Migration {
             $table->foreignId('department_id')->nullable()->references('id')->on('departments')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
             $table->string('departmentUser')->unique();
+            $table->string('companyDepartment')->unique();
             $table->timestamps();
         });
     }

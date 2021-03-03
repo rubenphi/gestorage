@@ -6,6 +6,7 @@ use App\Http\Requests\CreateAreaRequest;
 use App\Http\Requests\UpdateAreaRequest;
 use App\Models\Area;
 use \App\Http\Traits\LogedTrait;
+use Illuminate\Support\Arr;
 
 class AreaController extends Controller
 {
@@ -22,7 +23,7 @@ class AreaController extends Controller
         return $areas;
         }else {
             return response()->json([
-                'res' => true,
+                'res' => false,
                 'message' => 'access denied'
             ], 200);
         }
@@ -38,6 +39,9 @@ class AreaController extends Controller
     {
 
         if (LogedTrait::admin($request['company_id']) || LogedTrait::superadmin()) {
+            Arr::add($request, 'companyArea', ($request['company_id'] . '-' . $request['name']));
+            $request->validate([
+                'companyArea' => ['unique:areas,companyArea']]);
             $input = $request->all();
             Area::create($input);
             return response()->json([
@@ -83,6 +87,9 @@ class AreaController extends Controller
     public function update(UpdateAreaRequest $request, Area $area)
     {
         if (LogedTrait::admin($request['company_id']) || LogedTrait::superadmin()) {
+            Arr::add($request, 'companyArea', ($request['company_id'] . '-' . $request['name']));
+            $request->validate([
+                'companyArea' => ['unique:areas,companyArea' . $area->id]]);
             $input = $request->all();
             $area->update($input);
             return response()->json([

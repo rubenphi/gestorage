@@ -17,7 +17,8 @@ class DepartmentSeeder extends Seeder
         DB::table('departments')->insert([[
             'active' => true,
             'name' => 'contabilidad',
-            'company_id' => 1
+            'company_id' => 1,
+            'companyDepartment' => '1-contabilidad'
         ]]);
     }
 }

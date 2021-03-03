@@ -14,6 +14,9 @@ class Type extends Model
         'time',
         'company_id'
     ];
+    protected $hidden = [
+        'companyType'
+    ];
     public function company(){
         return $this->belongsTo(Company::class,'company_id');
     }

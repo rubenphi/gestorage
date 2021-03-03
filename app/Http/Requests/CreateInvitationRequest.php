@@ -25,7 +25,7 @@ class CreateInvitationRequest extends FormRequest
     {
         return [
             'active' => 'required|min:1|max:1',
-            'code' => 'required|unique:invitations,code|min:4|max:100',
+            'code' => 'required|min:4|max:100',
             'company_id' => 'required'
 
         ];

@@ -20,6 +20,7 @@ class CreateAreasTable extends Migration {
             $table->string('name', 100)->nullable();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('department_id')->nullable()->references('id')->on('departments')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('companyArea')->unique();
             $table->timestamps();
         });
     }

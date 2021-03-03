@@ -19,6 +19,7 @@ class CreateStatusesTable extends Migration {
             $table->string('name', 100)->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('companyStatus')->unique();
             $table->timestamps();
         });
     }

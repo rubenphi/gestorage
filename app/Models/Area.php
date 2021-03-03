@@ -14,6 +14,10 @@ class Area extends Model
         'company_id'
     ];
 
+    protected $hidden = [
+        'companyArea'
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class,'company_id');

@@ -16,7 +16,8 @@ class InvitationSeeder extends Seeder
     {
         DB::table('invitations')->insert([[
             'code' => 'AXU123',
-            'company_id' => 2
+            'company_id' => 2,
+            'companyInvitation' => '2-AXU123'
         ]]);
     }
 }

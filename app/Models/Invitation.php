@@ -9,7 +9,12 @@ class Invitation extends Model
     protected $table = 'invitations';
     protected $fillable = [
         'code',
-        'company_id'
+        'company_id',
+
+    ];
+
+    protected $hidden = [
+        'companyInvitation'
     ];
 
     public function company(){

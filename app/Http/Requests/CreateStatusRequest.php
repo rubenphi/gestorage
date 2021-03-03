@@ -28,6 +28,7 @@ class CreateStatusRequest extends FormRequest
             'name' => 'required|min:3|max:100',
             'company_id' => 'required'
 
+
         ];
     }
 }

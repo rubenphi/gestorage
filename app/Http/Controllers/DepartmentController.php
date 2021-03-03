@@ -6,6 +6,7 @@ use App\Http\Requests\CreateDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
 use App\Http\Traits\LogedTrait;
 use App\Models\Department;
+use Illuminate\Support\Arr;
 
 class DepartmentController extends Controller
 {
@@ -36,6 +37,9 @@ class DepartmentController extends Controller
     public function store(CreateDepartmentRequest $request)
     {
         if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+            Arr::add($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
+            $request->validate([
+                'companyDepartment' => ['unique:departments,companyDepartment']]);
             $input = $request->all();
 
             Department::create($input);
@@ -80,6 +84,9 @@ class DepartmentController extends Controller
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
         if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+            Arr::add($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
+            $request->validate([
+                'companyDepartment' => ['unique:departments,companyDepartment' . $department->id]]);
             $input = $request->all();
             $department->update($input);
             return response()->json([

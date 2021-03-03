@@ -18,7 +18,8 @@ class TypeSeeder extends Seeder
             'active' => true,
             'name' => 'Solicitud',
             'time' => 325,
-            'company_id' => 2
+            'company_id' => 2,
+            'companyType' => '2-Solicitud'
         ]]);
     }
 }
