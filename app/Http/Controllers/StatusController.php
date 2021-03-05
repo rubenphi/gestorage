@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStatusRequest;
-use App\Http\Traits\LogedTrait;
+use App\Http\Traits\Traits;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -17,7 +17,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        if (LogedTrait::superadmin()) {
+        if (Traits::superadmin()) {
             $statuses = Status::with('company')->get();
             return $statuses;
         } else {
@@ -36,7 +36,7 @@ class StatusController extends Controller
      */
     public function store(CreateStatusRequest $request)
     {
-        if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyStatus', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyStatus' => ['unique:statuses,companyStatus']]);
@@ -63,7 +63,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        if (LogedTrait::empresa($status->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($status->company_id) || Traits::superadmin()) {
             return $status::with('company')->find($status['id']);
         } else {
             return response()->json([
@@ -82,7 +82,7 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $status)
     {
-        if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyStatus', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyStatus' => ['unique:statuses,companyStatus' . $status->id]]);
@@ -109,7 +109,7 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        if (LogedTrait::admin(Status::find($id)->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin(Status::find($id)->company_id) || Traits::superadmin()) {
             Status::destroy($id);
             return response()->json([
                 'res' => true,

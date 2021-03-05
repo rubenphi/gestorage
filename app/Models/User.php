@@ -34,6 +34,7 @@ class User extends Authenticatable
         'password',
         'superadmin',
         'remember_token',
+        'companies'
     ];
 
     /**

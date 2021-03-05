@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRequestRequest;
 use App\Http\Requests\UpdateRequestRequest;
+use App\Http\Traits\Traits;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller
@@ -15,9 +16,16 @@ class RequestController extends Controller
      */
     public function index()
     {
+        if (Traits::superadmin()){
         $requests = \App\Models\Request::with('company')->with('status')->with('fromArea')->with('fromDepartment')->with('toArea')->with('toDepartment')->with('type')->with('user')->get();;
 
         return $requests;
+        } else {
+            return response()->json([
+                'res' => false,
+                'message' => 'access denied'
+            ], 200);
+        }
     }
 
     /**

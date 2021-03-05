@@ -7,7 +7,7 @@ use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\DeleteClientCompanyRequest;
 use App\Http\Requests\UpdateClientCompanyRequest;
 use App\Http\Requests\UpdateClientRequest;
-use App\Http\Traits\LogedTrait;
+use App\Http\Traits\Traits;
 use App\Models\Client;
 use Illuminate\Support\Arr;
 
@@ -20,7 +20,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        if (LogedTrait::superadmin() == true) {
+        if (Traits::superadmin() == true) {
             $clients = Client::with('company')->get();
             return $clients;
         } else {
@@ -45,7 +45,7 @@ class ClientController extends Controller
         ]);
         $input = $request->all();
 
-        if (LogedTrait::empresa($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($request->company_id) || Traits::superadmin()) {
             Client::create($input);
             return response()->json([
                 'res' => true,
@@ -67,7 +67,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        if (LogedTrait::empresa($client['company_id']) || LogedTrait::superadmin()) {
+        if (Traits::empresa($client['company_id']) || Traits::superadmin()) {
             return $client::with('company')->find($client['id']);
         } else {
             return response()->json([
@@ -86,7 +86,7 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        if (LogedTrait::empresa($request->company_id) || LogedTrait::admin()) {
+        if (Traits::empresa($request->company_id) || Traits::admin()) {
             Arr::add($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
             $request->validate([
                 'companyDocument' => ['unique:clients,companyDocument,' . $client->id]
@@ -113,7 +113,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        if (LogedTrait::admin(Client::find($id)->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin(Client::find($id)->company_id) || Traits::superadmin()) {
             Client::destroy($id);
             return response()->json([
                 'res' => true,

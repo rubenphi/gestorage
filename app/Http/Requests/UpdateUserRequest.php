@@ -25,7 +25,6 @@ class UpdateUserRequest extends FormRequest
     {
 
         return [
-            'name' => 'required|min:5|max:100',
             'active' => 'required|min:1|max:1',
             'first_name' => 'required|min:2|max:100',
             'last_name' => 'required|min:2|max:100',

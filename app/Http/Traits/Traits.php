@@ -2,9 +2,10 @@
 
 namespace App\Http\Traits;
 
+use App\Models\Invitation;
 use App\Models\User;
 
-trait LogedTrait
+trait Traits
 {
     public static function admin($id)
     {
@@ -26,7 +27,32 @@ trait LogedTrait
 
         $rolUser = auth()->user()::with('companies')->find(auth()->user()['id'])['companies']->find($id);
         if ($rolUser != null) {
-                return true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function coworker(User $user)
+    {
+        $empresas = $user->companies;
+
+        $value = false;
+
+        foreach ($empresas as $empresa) {
+            if (self::empresa($empresa->id)) {
+                $value = true;
+            }
+
+            return $value;
+        }
+    }
+
+    public static function invitation($code, $company_id)
+    {
+        $check = Invitation::where('code', $code)->where('company_id', $company_id)->first();
+        if ($check != null) {
+            return true;
         } else {
             return false;
         }
@@ -37,7 +63,7 @@ trait LogedTrait
     {
         $user = User::find($id);
 
-         if (strval($user) == auth()->user()) {
+        if (strval($user) == auth()->user()) {
             return true;
         } else {
             return false;
@@ -46,14 +72,15 @@ trait LogedTrait
 
     public static function loged()
     {
-        if (auth()->user() != null){
+        if (auth()->user() != null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public static function superadmin(){
-       return auth()->user()->superadmin;
+    public static function superadmin()
+    {
+        return auth()->user()->superadmin;
     }
 }

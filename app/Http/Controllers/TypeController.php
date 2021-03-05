@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTypeRequest;
 use App\Http\Requests\UpdateTypeRequest;
-use App\Http\Traits\LogedTrait;
+use App\Http\Traits\Traits;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -18,7 +18,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        if (LogedTrait::superadmin()) {
+        if (Traits::superadmin()) {
             $types = Type::with('company')->get();
             return $types;
         } else {
@@ -37,7 +37,7 @@ class TypeController extends Controller
      */
     public function store(CreateTypeRequest $request)
     {
-        if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyType', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyType' => ['unique:types,companyType']]);
@@ -64,7 +64,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        if (LogedTrait::empresa($type->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($type->company_id) || Traits::superadmin()) {
             return $type::with('company')->find($type['id']);
         } else {
             return response()->json([
@@ -83,7 +83,7 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyType', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyType' => ['unique:types,companyType' . $type->id]]);
@@ -110,7 +110,7 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        if (LogedTrait::admin(Type::find($id)->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin(Type::find($id)->company_id) || Traits::superadmin()) {
         Type::destroy($id);
         return response()->json([
             'res' => true,
@@ -126,7 +126,7 @@ class TypeController extends Controller
 
     public function showRequests(int $id)
     {
-        if (LogedTrait::empresa(Type::find($id)->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa(Type::find($id)->company_id) || Traits::superadmin()) {
         $type = Type::find($id);
         return $type->requests;
         }

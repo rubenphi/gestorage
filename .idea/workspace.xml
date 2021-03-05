@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef67cdd-7ccc-457e-9bce-c0f6b5069c9b" name="Default Changelist" comment="Implementación de Autenticación">
+    <list default="true" id="8ef67cdd-7ccc-457e-9bce-c0f6b5069c9b" name="Default Changelist" comment="Implementación de nombres unicos por empresa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AreaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AreaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateInvitationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateInvitationRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateStatusRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateStatusRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Area.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Area.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Department.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Invitation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Invitation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Type.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Type.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135210_create_invitations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135210_create_invitations_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135211_create_statuses _table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135211_create_statuses _table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135212_create_types_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135212_create_types_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135213_create_areas_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135213_create_areas_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135214_create_department_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135214_create_department_user_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/AreaSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/AreaSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DepartmentSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DepartmentSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/InvitationSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/InvitationSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/StatusSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/StatusSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/TypeSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/TypeSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateCompanyUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateCompanyUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Traits/LogedTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Traits/Traits.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +188,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -241,7 +233,9 @@
       <workItem from="1613659772471" duration="6655000" />
       <workItem from="1613770873100" duration="5864000" />
       <workItem from="1614718683309" duration="10861000" />
-      <workItem from="1614795506049" duration="4849000" />
+      <workItem from="1614795506049" duration="5532000" />
+      <workItem from="1614959754141" duration="5041000" />
+      <workItem from="1614977201985" duration="6946000" />
     </task>
     <task id="LOCAL-00001" summary="invitation controller">
       <created>1612216531564</created>
@@ -271,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613422494819</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implementación de nombres unicos por empresa">
+      <created>1614800469019</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614800469019</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,6 +296,7 @@
     <MESSAGE value="client controller" />
     <MESSAGE value="status controller" />
     <MESSAGE value="Implementación de Autenticación" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementación de Autenticación" />
+    <MESSAGE value="Implementación de nombres unicos por empresa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementación de nombres unicos por empresa" />
   </component>
 </project>

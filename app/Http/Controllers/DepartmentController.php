@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
-use App\Http\Traits\LogedTrait;
+use App\Http\Traits\Traits;
 use App\Models\Department;
 use Illuminate\Support\Arr;
 
@@ -17,7 +17,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        if (LogedTrait::superadmin()) {
+        if (Traits::superadmin()) {
             $departments = Department::with('company')->get();
             return $departments;
         } else {
@@ -36,7 +36,7 @@ class DepartmentController extends Controller
      */
     public function store(CreateDepartmentRequest $request)
     {
-        if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyDepartment' => ['unique:departments,companyDepartment']]);
@@ -63,7 +63,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        if (LogedTrait::empresa($department->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($department->company_id) || Traits::superadmin()) {
             return $department::with('company')->find($department['id']);
         } else {
             return response()->json([
@@ -83,7 +83,7 @@ class DepartmentController extends Controller
      */
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        if (LogedTrait::admin($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyDepartment' => ['unique:departments,companyDepartment' . $department->id]]);
@@ -112,7 +112,7 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
 
-        if (LogedTrait::admin(Department::find($id)->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin(Department::find($id)->company_id) || Traits::superadmin()) {
             Department::destroy($id);
             return response()->json([
                 'res' => true,
@@ -129,7 +129,7 @@ class DepartmentController extends Controller
     public function showAreas(int $id)
     {
         $department = Department::findOrFail($id);
-        if (LogedTrait::empresa($department->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($department->company_id) || Traits::superadmin()) {
             return $department->areas;
         } else {
             return response()->json([
@@ -142,7 +142,7 @@ class DepartmentController extends Controller
     public function showUsers(int $id)
     {
         $department = Department::findOrFail($id);
-        if (LogedTrait::empresa($department->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($department->company_id) || Traits::superadmin()) {
             return $department->users;
         } else {
             return response()->json([
@@ -155,7 +155,7 @@ class DepartmentController extends Controller
     public function showOutputRequests(int $id)
     {
         $department = Department::findOrFail($id);
-        if (LogedTrait::empresa($department->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($department->company_id) || Traits::superadmin()) {
             return $department->fromDepartment;
         } else {
             return response()->json([
@@ -168,7 +168,7 @@ class DepartmentController extends Controller
     public function showInputRequests(int $id)
     {
         $department = Department::findOrFail($id);
-        if (LogedTrait::empresa($department->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($department->company_id) || Traits::superadmin()) {
             return $department->toDepartment;
         } else {
             return response()->json([

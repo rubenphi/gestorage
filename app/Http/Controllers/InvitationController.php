@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
-use App\Http\Traits\LogedTrait;
+use App\Http\Traits\Traits;
 use App\Models\Invitation;
 use Illuminate\Support\Arr;
 
@@ -17,7 +17,7 @@ class InvitationController extends Controller
      */
     public function index()
     {
-        if (LogedTrait::superadmin()) {
+        if (Traits::superadmin()) {
             $invitations = Invitation::with('company')->get();
             return $invitations;
         } else {
@@ -37,7 +37,7 @@ class InvitationController extends Controller
     public function store(CreateInvitationRequest $request)
     {
 
-        if (LogedTrait::empresa($request->company_id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($request->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyInvitation', ($request['company_id'] . '-' . $request['code']));
             $request->validate([
                 'companyInvitation' => ['unique:invitations,companyInvitation']
@@ -65,7 +65,7 @@ class InvitationController extends Controller
      */
     public function show(Invitation $invitation)
     {
-        if (LogedTrait::admin($invitation->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($invitation->company_id) || Traits::superadmin()) {
             return $invitation::with('company')->find($invitation['id']);
         } else {
             return response()->json([
@@ -84,7 +84,7 @@ class InvitationController extends Controller
      */
     public function update(UpdateInvitationRequest $request, Invitation $invitation)
     {
-        if (LogedTrait::admin($invitation->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin($invitation->company_id) || Traits::superadmin()) {
             Arr::add($request, 'companyInvitation', ($request['company_id'] . '-' . $request['code']));
             $request->validate([
                 'companyInvitation' => ['unique:invitations,companyInvitation,' . $invitation->id]
@@ -112,7 +112,7 @@ class InvitationController extends Controller
      */
     public function destroy($id)
     {
-        if (LogedTrait::admin(Invitation::find($id)->company_id) || LogedTrait::superadmin()) {
+        if (Traits::admin(Invitation::find($id)->company_id) || Traits::superadmin()) {
             Invitation::destroy($id);
             return response()->json([
                 'res' => true,

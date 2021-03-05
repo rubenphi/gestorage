@@ -27,7 +27,8 @@ class CreateCompanyUserRequest extends FormRequest
             'rol' => 'required|max:100',
             'active' => 'required|min:1|max:1',
             'company_id' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'code' => 'max:100'
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
-use App\Http\Traits\LogedTrait;
+use App\Http\Traits\Traits;
 use App\Models\Company;
 
 class CompanyController extends Controller
@@ -16,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        if (LogedTrait::superadmin()) {
+        if (Traits::superadmin()) {
             $companies = Company::all();
 
             return $companies;
@@ -37,7 +37,7 @@ class CompanyController extends Controller
     public function store(CreateCompanyRequest $request)
     {
 
-        if (LogedTrait::loged() || LogedTrait::superadmin()) {
+        if (Traits::loged() || Traits::superadmin()) {
             $input = $request->all();
 
             Company::create($input);
@@ -61,7 +61,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        if (LogedTrait::empresa($company) || LogedTrait::superadmin()) {
+        if (Traits::empresa($company) || Traits::superadmin()) {
             return $company;
         } else {
             return response()->json([
@@ -80,7 +80,7 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        if (LogedTrait::admin($company) || LogedTrait::superadmin()) {
+        if (Traits::admin($company) || Traits::superadmin()) {
             $input = $request->all();
             $company->update($input);
             return response()->json([
@@ -103,7 +103,7 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        if (LogedTrait::admin($id) || LogedTrait::superadmin()) {
+        if (Traits::admin($id) || Traits::superadmin()) {
             Company::destroy($id);
             return response()->json([
                 'res' => true,
@@ -120,7 +120,7 @@ class CompanyController extends Controller
 
     public function showUsers(int $id)
     {
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
             $company = Company::findOrFail($id);
             return $company->users;
         }else {
@@ -133,7 +133,7 @@ class CompanyController extends Controller
 
     public function showClients(int $id)
     {
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::findOrFail($id);
         return $company->clients;
         }else {
@@ -147,7 +147,7 @@ class CompanyController extends Controller
     public function showAreas(int $id)
     {
 
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::findOrFail($id);
         return $company->areas;
         }else {
@@ -161,7 +161,7 @@ class CompanyController extends Controller
     public function showDepartments(int $id)
     {
 
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::findOrFail($id);
         return $company->departments;
         }else {
@@ -175,7 +175,7 @@ class CompanyController extends Controller
     public function showTypes(int $id)
     {
 
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::find($id);
         return $company->types;
         }else {
@@ -189,7 +189,7 @@ class CompanyController extends Controller
     public function showStatuses(int $id)
     {
 
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::find($id);
         return $company->statuses;
         }else {
@@ -203,7 +203,7 @@ class CompanyController extends Controller
     public function showInvitations(int $id)
     {
 
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::find($id);
         return $company->invitations;
         }else {
@@ -217,7 +217,7 @@ class CompanyController extends Controller
     public function showRequests(int $id)
     {
 
-        if (LogedTrait::empresa($id) || LogedTrait::superadmin()) {
+        if (Traits::empresa($id) || Traits::superadmin()) {
         $company = Company::find($id);
         return $company->requests;
         }else {
