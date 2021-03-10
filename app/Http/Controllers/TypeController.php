@@ -38,7 +38,7 @@ class TypeController extends Controller
     public function store(CreateTypeRequest $request)
     {
         if (Traits::admin($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyType', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyType', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyType' => ['unique:types,companyType']]);
             $input = $request->all();
@@ -84,7 +84,7 @@ class TypeController extends Controller
     public function update(UpdateTypeRequest $request, Type $type)
     {
         if (Traits::admin($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyType', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyType', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyType' => ['unique:types,companyType' . $type->id]]);
         $input = $request->all();

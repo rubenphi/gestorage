@@ -26,6 +26,7 @@ class CreateRequestsTable extends Migration {
             $table->string('response_email', 100);
             $table->string('response_document', 100);
             $table->string('response_type', 100);
+            $table->string('code')->unique();
             $table->foreignId('status_id')->nullable()->references('id')->on('statuses')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('from_area_id')->nullable()->references('id')->on('areas')->cascadeOnUpdate()->nullOnDelete();

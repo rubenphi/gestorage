@@ -20,7 +20,7 @@ class CreateTypesTable extends Migration {
             $table->string('name', 100)->nullable();
             $table->integer('time')->nullable();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
-            $table->string('companyTypes')->unique();
+            $table->string('companyType')->unique();
             $table->timestamps();
         });
     }

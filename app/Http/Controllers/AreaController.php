@@ -39,7 +39,7 @@ class AreaController extends Controller
     {
 
         if (Traits::admin($request['company_id']) || Traits::superadmin()) {
-            Arr::add($request, 'companyArea', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyArea', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyArea' => ['unique:areas,companyArea']]);
             $input = $request->all();
@@ -87,7 +87,7 @@ class AreaController extends Controller
     public function update(UpdateAreaRequest $request, Area $area)
     {
         if (Traits::admin($request['company_id']) || Traits::superadmin()) {
-            Arr::add($request, 'companyArea', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyArea', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyArea' => ['unique:areas,companyArea' . $area->id]]);
             $input = $request->all();

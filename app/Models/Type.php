@@ -12,7 +12,9 @@ class Type extends Model
         'active',
         'name',
         'time',
-        'company_id'
+        'company_id',
+        'companyType'
+
     ];
     protected $hidden = [
         'companyType'

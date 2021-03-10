@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateInvitationRequest;
 use App\Http\Traits\Traits;
 use App\Models\Invitation;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class InvitationController extends Controller
 {
@@ -38,7 +39,18 @@ class InvitationController extends Controller
     {
 
         if (Traits::empresa($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyInvitation', ($request['company_id'] . '-' . $request['code']));
+            $make = true;
+            while ($make == true) {
+                Arr::set($request, 'code', Str::random(6));
+                Arr::set($request, 'companyInvitation', ($request['company_id'] . '-' . $request['code']));
+
+                if (Invitation::where('companyInvitation', $request->companyInvitation)->exists()) {
+                    $make = true;
+                } else {
+                    $make = false;
+                }
+
+            }
             $request->validate([
                 'companyInvitation' => ['unique:invitations,companyInvitation']
             ]);
@@ -85,7 +97,7 @@ class InvitationController extends Controller
     public function update(UpdateInvitationRequest $request, Invitation $invitation)
     {
         if (Traits::admin($invitation->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyInvitation', ($request['company_id'] . '-' . $request['code']));
+            Arr::set($request, 'companyInvitation', ($request['company_id'] . '-' . $request['code']));
             $request->validate([
                 'companyInvitation' => ['unique:invitations,companyInvitation,' . $invitation->id]
             ]);

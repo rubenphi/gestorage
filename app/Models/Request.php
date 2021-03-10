@@ -14,6 +14,7 @@ class Request extends Model
         'expire',
         'active',
         'comments',
+        'code',
         'url',
         'response_address',
         'response_name',

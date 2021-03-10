@@ -25,7 +25,7 @@ class ClientSeeder extends Seeder
             'company_id' => 2,
             'address' => 'calle falsa 123',
             'email' => 'felipe@gmail.com',
-            'companyDocument' => '2|A3218947'
+            'companyDocument' => '2-A3218947'
         ]]);
     }
 }

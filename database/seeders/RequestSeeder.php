@@ -25,6 +25,7 @@ class RequestSeeder extends Seeder
             'response_email' => 'pepito@gmail.com',
             'response_document' => '12357qw',
             'response_type' => 'correspondencia física',
+            'code' => '1-azsqwer',
             'status_id' => 1,
             'company_id' => 1,
             'from_area_id' => 1,

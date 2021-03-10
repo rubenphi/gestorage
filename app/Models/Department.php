@@ -10,7 +10,8 @@ class Department extends Model
     protected $fillable = [
         'active',
         'name',
-        'company_id'
+        'company_id',
+        'companyDepartment'
     ];
 
     protected $hidden = [

@@ -11,7 +11,8 @@ class Area extends Model
         'active',
         'name',
         'department_id',
-        'company_id'
+        'company_id',
+        'companyArea'
     ];
 
     protected $hidden = [

@@ -49,7 +49,7 @@ class UserController extends Controller
 
     }
 
-    public function logeduser(\Illuminate\Http\Request $request)
+    public function logeduser()
     {
         return Traits::loged();
 
@@ -126,7 +126,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if (Traits::coworker($user)) {
+        if (Traits::coworker($user) || Traits::superadmin()) {
             return $user;
         } else {
             return response()->json([
@@ -145,7 +145,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        if (Traits::mismo($user->id)) {
+        if (Traits::mismo($user->id) || Traits::superadmin()) {
             $input = $request->all();
             $input['password'] = Hash::make($request->password);
             $user->update($input);
@@ -185,7 +185,7 @@ class UserController extends Controller
 
     public function showCompanies(int $id)
     {
-        if (Traits::mismo($id)) {
+        if (Traits::mismo($id) || Traits::superadmin()) {
             $user = User::findOrFail($id);
             return $user->companies;
         } else {
@@ -247,7 +247,7 @@ class UserController extends Controller
             }
             $user = User::findOrFail($request->user_id);
             $exist = $user->companies()->where('company_id', $request->company_id)->exists();
-            Arr::add($request, 'companyUser', ($request->company_id . '-' . $request->user_id));
+            Arr::set($request, 'companyUser', ($request->company_id . '-' . $request->user_id));
             $request->validate([
                 'companyUser' => ['unique:company_user,companyUser,' . $user->companies()->where('company_id', $request->company_id)->first()->pivot->id]
             ]);
@@ -276,7 +276,7 @@ class UserController extends Controller
 
     public function showAreas(int $id)
     {
-        if (Traits::mismo($id)) {
+        if (Traits::mismo($id) || Traits::superadmin()) {
             $user = User::findOrFail($id);
             return $user->areas;
         } else {
@@ -290,7 +290,7 @@ class UserController extends Controller
     public function addAreas(CreateAreaUserRequest $request)
     {
         if (Traits::admin(Area::findOrFail($request->area_id)->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'areaUser', ($request->area_id . '-' . $request->user_id));
+            Arr::set($request, 'areaUser', ($request->area_id . '-' . $request->user_id));
             $request->validate([
                 'areaUser' => ['unique:area_user,areaUser']
             ]);
@@ -335,7 +335,7 @@ class UserController extends Controller
             $user = User::findOrFail($request->user_id);
             $exist = $user->areas()->where('area_id', $request->area_id)->exists();
 
-            Arr::add($request, 'areaUser', ($request->area_id . '-' . $request->user_id));
+            Arr::set($request, 'areaUser', ($request->area_id . '-' . $request->user_id));
             $request->validate([
                 'areaUser' => ['unique:area_user,areaUser,' . $user->areas()->where('area_id', $request->area_id)->first()->pivot->id]
             ]);
@@ -362,7 +362,7 @@ class UserController extends Controller
 
     public function showDepartments(int $id)
     {
-        if (Traits::mismo($id)) {
+        if (Traits::mismo($id) || Traits::superadmin()) {
             $user = User::findOrFail($id);
             return $user->departments;
         } else {
@@ -376,7 +376,7 @@ class UserController extends Controller
     public function addDepartments(CreateDepartmentUserRequest $request)
     {
         if (Traits::admin(Department::findOrFail($request->department_id)->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'departmentUser', ($request->department_id . '-' . $request->user_id));
+            Arr::set($request, 'departmentUser', ($request->department_id . '-' . $request->user_id));
             $request->validate([
                 'departmentUser' => ['unique:department_user,departmentUser']
             ]);
@@ -419,7 +419,7 @@ class UserController extends Controller
             $user = User::findOrFail($request->user_id);
             $exist = $user->departments()->where('department_id', $request->department_id)->exists();
 
-            Arr::add($request, 'departmentUser', ($request->area_id . '-' . $request->user_id));
+            Arr::set($request, 'departmentUser', ($request->area_id . '-' . $request->user_id));
             $request->validate([
                 'departmentUser' => ['unique:department_user,departmentUser,' . $user->departments()->where('department_id', $request->department_id)->first()->pivot->id]
             ]);
@@ -446,7 +446,7 @@ class UserController extends Controller
 
     public function showRequests(int $id)
     {
-        if (Traits::mismo($id)) {
+        if (Traits::mismo($id) || Traits::superadmin()) {
             $user = User::findOrFail($id);
             return $user->requests;
         } else {

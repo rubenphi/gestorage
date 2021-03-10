@@ -19,6 +19,7 @@ class CreateDepartmentsTable extends Migration {
             $table->boolean('active')->default(true);
             $table->string('name', 100)->nullable();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('companyDepartment')->unique();
             $table->timestamps();
         });
     }

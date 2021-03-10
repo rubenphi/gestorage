@@ -9,7 +9,8 @@ class Status extends Model
     protected $table = 'statuses';
     protected $fillable = [
         'name',
-        'company_id'
+        'company_id',
+        'companyStatus'
     ];
     protected $hidden = [
         'companyStatus'

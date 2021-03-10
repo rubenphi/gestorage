@@ -37,7 +37,7 @@ class DepartmentController extends Controller
     public function store(CreateDepartmentRequest $request)
     {
         if (Traits::admin($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyDepartment' => ['unique:departments,companyDepartment']]);
             $input = $request->all();
@@ -84,7 +84,7 @@ class DepartmentController extends Controller
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
         if (Traits::admin($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyDepartment', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyDepartment' => ['unique:departments,companyDepartment' . $department->id]]);
             $input = $request->all();

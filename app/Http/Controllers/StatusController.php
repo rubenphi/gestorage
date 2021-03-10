@@ -37,7 +37,7 @@ class StatusController extends Controller
     public function store(CreateStatusRequest $request)
     {
         if (Traits::admin($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyStatus', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyStatus', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyStatus' => ['unique:statuses,companyStatus']]);
             $input = $request->all();
@@ -83,7 +83,7 @@ class StatusController extends Controller
     public function update(Request $request, Status $status)
     {
         if (Traits::admin($request->company_id) || Traits::superadmin()) {
-            Arr::add($request, 'companyStatus', ($request['company_id'] . '-' . $request['name']));
+            Arr::set($request, 'companyStatus', ($request['company_id'] . '-' . $request['name']));
             $request->validate([
                 'companyStatus' => ['unique:statuses,companyStatus' . $status->id]]);
             $input = $request->all();

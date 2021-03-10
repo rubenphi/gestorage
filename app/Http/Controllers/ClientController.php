@@ -39,7 +39,7 @@ class ClientController extends Controller
      */
     public function store(CreateClientRequest $request)
     {
-        Arr::add($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
+        Arr::set($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
         $request->validate([
             'companyDocument' => ['unique:clients,companyDocument']
         ]);
@@ -86,8 +86,8 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        if (Traits::empresa($request->company_id) || Traits::admin()) {
-            Arr::add($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
+        if (Traits::empresa($request->company_id) || Traits::admin() || Traits::superadmin()) {
+            Arr::set($request, 'companyDocument', ($request['company_id'] . '-' . $request['document']));
             $request->validate([
                 'companyDocument' => ['unique:clients,companyDocument,' . $client->id]
             ]);

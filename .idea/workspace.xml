@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef67cdd-7ccc-457e-9bce-c0f6b5069c9b" name="Default Changelist" comment="Implementación de nombres unicos por empresa">
+    <list default="true" id="8ef67cdd-7ccc-457e-9bce-c0f6b5069c9b" name="Default Changelist" comment="Implementación permisos User controller">
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AreaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AreaController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DepartmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateCompanyUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateCompanyUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Traits/LogedTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Traits/Traits.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateInvitationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateInvitationRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135209_create_departments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135209_create_departments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135212_create_types_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135212_create_types_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135214_create_department_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135214_create_department_user_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135216_create_requests_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135216_create_requests_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/RequestSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RequestSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +232,9 @@
       <workItem from="1614718683309" duration="10861000" />
       <workItem from="1614795506049" duration="5532000" />
       <workItem from="1614959754141" duration="5041000" />
-      <workItem from="1614977201985" duration="6946000" />
+      <workItem from="1614977201985" duration="7216000" />
+      <workItem from="1615077729619" duration="2147000" />
+      <workItem from="1615379785496" duration="8737000" />
     </task>
     <task id="LOCAL-00001" summary="invitation controller">
       <created>1612216531564</created>
@@ -272,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614800469019</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Implementación permisos User controller">
+      <created>1614988432457</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1614988432457</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +303,7 @@
     <MESSAGE value="status controller" />
     <MESSAGE value="Implementación de Autenticación" />
     <MESSAGE value="Implementación de nombres unicos por empresa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementación de nombres unicos por empresa" />
+    <MESSAGE value="Implementación permisos User controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementación permisos User controller" />
   </component>
 </project>
