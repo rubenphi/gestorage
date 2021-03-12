@@ -28,7 +28,6 @@ class UpdateRequestRequest extends FormRequest
             'expire' => 'required',
             'active' => 'required|min:1|max:1',
             'comments' => 'min:5|max:520',
-            'url' => 'min:5|max:100',
             'response_address' => 'required|min:5|max:100',
             'response_name' => 'required|min:5|max:100',
             'response_email' => 'required|min:5|max:100',

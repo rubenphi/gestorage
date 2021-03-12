@@ -54,6 +54,9 @@ class RequestController extends Controller
 
             }
             $input = $request->all();
+            if($request->has('file') & gettype($request->file) == 'object'){
+                $input['file'] = Traits::uploadDocument($request->file);
+            }
             \App\Models\Request::create($input);
             return response()->json([
                 'res' => true,
@@ -99,7 +102,9 @@ class RequestController extends Controller
     {
         if (Traits::empresa($rqst->company_id) || Traits::superadmin()) {
             $input = $rqst->all();
-
+            if($rqst->has('file') & gettype($rqst->file) == 'object'){
+                $input['file'] = Traits::uploadDocument($rqst->file);
+            }
             $request->update($input);
             return response()->json([
                 'res' => true,

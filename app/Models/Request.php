@@ -15,7 +15,7 @@ class Request extends Model
         'active',
         'comments',
         'code',
-        'url',
+        'file',
         'response_address',
         'response_name',
         'response_email',

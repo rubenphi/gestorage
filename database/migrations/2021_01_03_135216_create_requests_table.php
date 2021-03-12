@@ -20,7 +20,7 @@ class CreateRequestsTable extends Migration {
             $table->timestamp('expire');
             $table->boolean('active')->default(true);
             $table->string('comments', 520)->nullable();
-            $table->string('url', 100);
+            $table->string('file', 100);
             $table->string('response_address', 100);
             $table->string('response_name', 100);
             $table->string('response_email', 100);

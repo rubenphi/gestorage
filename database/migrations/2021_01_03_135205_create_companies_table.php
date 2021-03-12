@@ -18,6 +18,7 @@ class CreateCompaniesTable extends Migration {
             $table->id();
             $table->boolean('active')->default(true);
             $table->string('name', 100)->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

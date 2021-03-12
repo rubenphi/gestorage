@@ -83,4 +83,18 @@ trait Traits
     {
         return auth()->user()->superadmin;
     }
+
+    public static function uploadPhoto($file){
+
+        $nameFile = time(). "." . $file->getClientOriginalExtension();
+        $file->move(public_path('fotografias'), $nameFile);
+        return 'backend/public/fotografias/'.$nameFile;
+    }
+
+    public static function uploadDocument($file){
+
+        $nameFile = time(). "." . $file->getClientOriginalExtension();
+        $file->move(public_path('documents'), $nameFile);
+        return 'backend/public/documents/'.$nameFile;
+    }
 }

@@ -39,7 +39,9 @@ class CompanyController extends Controller
 
         if (Traits::loged() || Traits::superadmin()) {
             $input = $request->all();
-
+            if($request->has('photo') & gettype($request->photo) == 'object'){
+                $input['photo'] = Traits::uploadPhoto($request->photo);
+            }
             Company::create($input);
             return response()->json([
                 'res' => true,
@@ -82,6 +84,9 @@ class CompanyController extends Controller
     {
         if (Traits::admin($company) || Traits::superadmin()) {
             $input = $request->all();
+            if($request->has('photo') & gettype($request->photo) == 'object'){
+                $input['photo'] = Traits::uploadPhoto($request->photo);
+            }
             $company->update($input);
             return response()->json([
                 'res' => true,

@@ -64,7 +64,11 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         Arr::set($request, 'superadmin', false);
+
         $input = $request->all();
+        if($request->has('photo') & gettype($request->photo) == 'object'){
+            $input['photo'] = Traits::uploadPhoto($request->photo);
+        }
         $input['password'] = Hash::make($request->password);
 
         User::create($input);
@@ -146,7 +150,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         if (Traits::mismo($user->id) || Traits::superadmin()) {
+
             $input = $request->all();
+            if($request->has('photo') & gettype($request->photo) == 'object'){
+                $input['photo'] = Traits::uploadPhoto($request->photo);
+            }
             $input['password'] = Hash::make($request->password);
             $user->update($input);
             return response()->json([

@@ -9,7 +9,8 @@ class Company extends Model
     protected $table = 'companies';
     protected $fillable = [
         'active',
-        'name'
+        'name',
+        'photo'
     ];
     public function areas(){
         return $this->hasMany(Area::class);

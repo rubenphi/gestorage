@@ -2,16 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ef67cdd-7ccc-457e-9bce-c0f6b5069c9b" name="Default Changelist" comment="Implementación permisos User controller">
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/documents/1615509566.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fotografias/1615507180.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fotografias/1615507450.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fotografias/1615507493.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fotografias/1615507579.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fotografias/1615507791.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fotografias/1615508736.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateInvitationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateInvitationRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135209_create_departments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135209_create_departments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135212_create_types_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135212_create_types_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135214_create_department_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135214_create_department_user_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateRequestRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateRequestRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateRequestRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateRequestRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Traits/Traits.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Traits/Traits.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135205_create_companies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135205_create_companies_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135206_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135206_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_03_135216_create_requests_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_03_135216_create_requests_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/RequestSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/RequestSeeder.php" afterDir="false" />
     </list>
@@ -235,6 +244,8 @@
       <workItem from="1614977201985" duration="7216000" />
       <workItem from="1615077729619" duration="2147000" />
       <workItem from="1615379785496" duration="8737000" />
+      <workItem from="1615504646750" duration="3215000" />
+      <workItem from="1615508276979" duration="1541000" />
     </task>
     <task id="LOCAL-00001" summary="invitation controller">
       <created>1612216531564</created>

@@ -19,7 +19,7 @@ class RequestSeeder extends Seeder
             'name' => 'reclamo por falta se servicios',
             'expire' => date('Y-m-d H:i:s', strtotime('+ 24 hours')),
             'comments' => 'ninguno',
-            'url' => 'ninguna',
+            'file' => 'ninguna',
             'response_address' => 'callefalsa123',
             'response_name' => 'pepito perez',
             'response_email' => 'pepito@gmail.com',
